@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Created By Sangam jha</title>
+    <style>
+      body {
+        background-color: rgb(159, 237, 237);
+        background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsEECQHVB4x_Dpw5CkCUsuFPv9AIo1gmxQcE4O8CCWsA&s");
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+      .header {
+        text-align: center;
+      }
+      .header h3 {
+        color: rgb(31, 208, 84);
+      }
+      .header p {
+        color: rgb(240, 145, 21);
+      }
+      h4 {
+        color: #e80db1;
+        text-decoration: underline;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        border-bottom: 1px solid #0ad3e5;
+      }
+      th {
+        padding: 1%;
+        background-color: #50e390;
+        font-size: large;
+      }
+      input[type="text"] {
+      overflow: scroll;
+        width: 95%;
+        padding: px;
+        color: #ab1313b6;
+        font-size: large;
+        padding: 3px;
+        background-color: rgb(165, 239, 239);
+      }
+      /* .button {
+        padding: 10px;
+        border-radius: 19px;
+        position: relative;
+        left: 40%;
+        margin: 5%;
+        font-family: "Courier New", Courier, monospace;
+        font-size: larger;
+        font-style: italic;
+        background-color: blueviolet;
+      } */
+      .button,
+      .delete-button,
+      .addRow {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      @media print {
+        .button-container,
+        .addRow-container,
+        .delete-button {
+          display: none;
+        }
+      }
+      .totalPy {
+        width: 100%;
+        margin: 20px;
+        font-size: larger;
+        color: darkblue;
+      }
+      #totalPayment {
+        padding-left: 10px;
+      }
+      a{
+    color: white;
+    font-size: 10px;
+    font-family: "Rubik",sans-serif;
+    position:flex;
+   justify-content: center;
+    padding:8px 12px 8px 12px;
+    background-color: #d91a7a;
+    text-decoration:none;
+}
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1 style="color: rgb(40, 11, 231)">SAKSHI RAIL CARGO</h1>
+      <p>DOMESRIC & INTERNATIONAL FREIGHT FORWARDER</p>
+      <p>
+        Offie Add H.No.F-185,Gali No-8,Gaytri Clony,Baljit Nagar, Central
+        Delhi,Delhi-110008
+      </p>
+      <h3>MOB:-9540706399, Email.id-sakshirailcargo2019@gmail.com</h3>
+      <h4>JOURNAL VOUCHER</h4>
+    </div>
+    <table border="1" id="myTable">
+      <tr>
+        <th>Station</th>
+        <th>Box/Delivery</th>
+        <th>Company</th>
+        <th>Payment</th>
+      </tr>
+      <tr>
+        <td><input type="text" name="name" /></td>
+        <td><input type="text" name="name" /></td>
+        <td><input type="text" name="name" /></td>
+        <td>
+          <input
+            type="text"
+            name="name"
+            class="payment-input"
+            oninput="calculateTotal()"
+          />
+        </td>
+        <td>
+          <button class="delete-button" onclick="deleteRow(this)">
+            Delete
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td><textarea type="text" name="name"> </textarea> </td>
+        <td><input type="text" name="name" /></td>
+        <td><input type="text" name="name" /></td>
+        <td>
+          <input
+            type="text"
+            name="name"
+            class="payment-input"
+            oninput="calculateTotal()"
+          />
+        </td>
+        <td>
+          <button class="delete-button" onclick="deleteRow(this)">
+            Delete
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td><input type="text" name="name" /></td>
+        <td><input type="text" name="name" /></td>
+        <td><input type="text" name="name" /></td>
+        <td>
+          <input
+            type="text"
+            name="name"
+            class="payment-input"
+            oninput="calculateTotal()"
+          />
+        </td>
+        <td>
+          <button class="delete-button" onclick="deleteRow(this)">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </table>
+    <div class="totalPy">Total Payment: <span id="totalPayment">0</span></div>
+    <div class="button-container">
+      <button class="addRow" onclick="addRow()">Add Row</button>
+
+      <button class="button" onclick="printTable()">Print</button>
+      <a href="main.html" target="_blank">
+        <i class="fa fa-youtube-play" aria-hidden="true"></i> &nbsp;Back  
+      </a>
+    </div>
+    <script>
+      function addRow() {
+        var table = document
+          .getElementById("myTable")
+          .getElementsByTagName("tbody")[0];
+        var newRow = table.insertRow(table.rows.length);
+        var cell1 = newRow.insertCell(0);
+        var cell2 = newRow.insertCell(1);
+        var cell3 = newRow.insertCell(2);
+        var cell4 = newRow.insertCell(3);
+        var cell5 = newRow.insertCell(4);
+
+        cell1.innerHTML = '<input type="text" name="name">';
+        cell2.innerHTML = '<input type="text" name="age">';
+        cell3.innerHTML = '<input type="text" name="name">';
+        cell4.innerHTML =
+          '<input type="text" name="age" class="payment-input"  oninput="calculateTotal()">';
+        cell5.innerHTML =
+          '<button class="delete-button" onclick="deleteRow(this)">Delete</button>';
+      }
+
+      function deleteRow(button) {
+        var row = button.parentNode.parentNode;
+        row.parentNode.removeChild(row);
+        calculateTotal();
+      }
+      function calculateTotal() {
+        var total = 0;
+        var paymentInputs = document.getElementsByClassName("payment-input");
+        for (var i = 0; i < paymentInputs.length; i++) {
+          var payment = parseFloat(paymentInputs[i].value);
+          if (!isNaN(payment)) {
+            total += payment;
+          }
+        }
+
+        document.getElementById("totalPayment").textContent = total.toFixed(2);
+      }
+
+      function printTable() {
+        window.print();
+      }
+//       document.querySelector('input').addEventListener("input", function(){
+//   this.style.height = '0px';
+//   this.style.height = this.scrollHeight + '2px';
+// })
+    </script>
+  </body>
+</html>

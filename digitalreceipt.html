@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Created By Sangam jha</title>
+    <style>
+      body {
+        background-color: rgb(159, 237, 237);
+        background-image: url("https://t3.ftcdn.net/jpg/03/44/67/38/360_F_344673825_6fU6IORyipkYpfU1mg2vmxtHxDToUO6Q.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        font-style: italic;
+      }
+      .header {
+        text-align: center;
+      }
+      .header h3 {
+        color: rgb(31, 208, 84);
+      }
+      .header p {
+        color: rgb(240, 145, 21);
+      }
+      h4,
+      h2 {
+        color: #e80db1;
+        text-decoration: underline;
+      }
+      p {
+        font-size: small;
+        font-style: italic;
+        color: rgb(245, 206, 206);
+        text-decoration: underline;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        border: 1px solid #dddddd;
+        padding: 4px;
+        text-align: left;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+      input[type="text"] {
+        width: 95%;
+        padding: 5px;
+      }
+      .button-container {
+        margin-top: 20px;
+        text-align: center;
+      }
+      .button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .delete-button {
+        padding: 6px 10px;
+        background-color: #dc3545;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      @media print {
+        .button-container,
+        .addRow-container,
+        .delete-button,
+        .payment-input {
+          display: none;
+        }
+        body {
+          max-width: none;
+        }
+        table {
+          page-break-inside: auto;
+        }
+      }
+      a{
+    color: white;
+    font-size: 10px;
+    font-family: "Rubik",sans-serif;
+    position:flex;
+   justify-content: center;
+    padding:8px 12px 8px 12px;
+    background-color: #d91a7a;
+    text-decoration:none;
+}
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1 style="color: rgb(40, 11, 231)">SAKSHI RAIL CARGO</h1>
+      <p>DOMESRIC & INTERNATIONAL FREIGHT FORWARDER</p>
+      <p>
+        Offie Add H.No.F-185,Gali No-8,Gaytri Clony,Baljit Nagar, Central
+        Delhi,Delhi-110008
+      </p>
+      <h3>MOB:-9540706399, Email.id-sakshirailcargo2019@gmail.com</h3>
+      <h2>QUATATION</h2>
+    </div>
+    <p>
+      CLIENT NAME:<input
+        style="
+          background-color: #dd468a;
+          color: azure;
+          font-size: large;
+          font-style: italic;
+          border: none;
+        "
+      />
+    </p>
+    <table id="billTable" border="6px">
+      <thead>
+        <tr>
+          <th>Serial</th>
+          <th>Date</th>
+          <th>Train No.</th>
+          <th>Patricular</th>
+          <th>PKG</th>
+          <th>Weight</th>
+          <th>Rate</th>
+          <th>Dest</th>
+          <th>$RS</th>
+          <th class="payment-input">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="serial-number">1</td>
+          <td><input type="text" name="date" id="dateInput" /></td>
+          <td><input type="text" name="name" /></td>
+          <td><input type="text" name="payment" /></td>
+          <td><input type="text" name="name" /></td>
+          <td><input type="text" name="name" /></td>
+          <td><input type="text" name="payment" /></td>
+          <td><input type="text" name="name" /></td>
+          <td><input type="text" name="name" /></td>
+          <td>
+            <button class="delete-button" onclick="deleteRow(this)">
+              Delete
+            </button>
+          </td>
+        </tr>
+        <!-- You can add more rows dynamically using JavaScript -->
+      </tbody>
+    </table>
+
+    <div style="margin-top: 25px; border: 1px solid rgba(28, 2, 2, 0.257)">
+      <h4
+        style="
+          color: antiquewhite;
+          text-decoration: underline;
+          margin: 10px;
+          font-style: italic;
+        "
+      >
+        Terms & Condition
+      </h4>
+      <ol style="font-style: italic; margin: 2px">
+        <li>The Owner Should Ensure The Goods For All Risks</li>
+        <li>
+          Disputes Relating To This Bill Must Be Submit In Writing Which One
+          Week From Receipt Of The Same
+        </li>
+        <li>
+          Interest@18% Per Annum Will Be Must Be Charged, If Payment Is Not Made
+          With In 15 Day's Of Bill Date
+        </li>
+        <li>All Disputes Are Subject To Delhi Juriasdiction</li>
+      </ol>
+    </div>
+
+    <div class="button-container">
+      <button class="button" onclick="addRow()">Add Row</button>
+      <button class="button" onclick="printTable()">Print Table</button>
+      <a href="main.html" target="_blank">
+        <i class="fa fa-youtube-play" aria-hidden="true"></i> &nbsp;Back  
+      </a>
+    </div>
+
+    <div
+      style="
+        text-align: end;
+        font-size: larger;
+        color: #d7f512;
+        padding-right: 25px;
+      "
+    >
+      SAKSHI RAIL CARGO
+    </div>
+    <script>
+      function addRow() {
+        var table = document.getElementById("billTable");
+        var newRow = table.insertRow(-1); // Insert at the last position
+        var cells = [
+          "Serial",
+          "Date",
+          "Train No.",
+          "Patricular",
+          "PKG",
+          "Weight",
+          "Rate",
+          "Dest",
+          "$RS",
+          "Action",
+        ];
+
+        for (var i = 0; i < cells.length; i++) {
+          var cell = newRow.insertCell(i);
+          if (cells[i] === "Serial") {
+            cell.className = "serial-number";
+            cell.innerHTML = table.rows.length - 1; // Set serial number
+          } else if (cells[i] === "$RS") {
+            cell.innerHTML = '<input type="text" readonly>';
+          } else if (cells[i] === "Action") {
+            cell.innerHTML =
+              '<button class="delete-button" onclick="deleteRow(this)">Delete</button>';
+          } else {
+            cell.innerHTML =
+              '<input type="' +
+              (cells[i] === "Date" ? "text" : "text") +
+              '">' 
+          
+
+          }
+        }
+      }
+      function initializeSerialNumbers() {
+        var serialNumbers = document.querySelectorAll("#billTable tbody tr");
+        for (var i = 0; i < serialNumbers.length; i++) {
+          serialNumbers[i].querySelector("td:first-child").textContent = i + 1;
+        }
+      }
+      function deleteRow(button) {
+        var row = button.parentNode.parentNode;
+        row.parentNode.removeChild(row);
+        initializeSerialNumbers(); // Update serial numbers
+      }
+
+      function printTable() {
+        window.print();
+      }
+
+      function formatDate(date) {
+        var day = date.getDate();
+        var month = date.getMonth() + 1;
+        var year = date.getFullYear();
+
+        // Pad single-digit day and month with leading zero
+        if (day < 10) {
+          day = "0" + day;
+        }
+        if (month < 10) {
+          month = "0" + month;
+        }
+
+        return day + "/" + month + "/" + year;
+      }
+
+      // Example: Set the input field value with today's date in dd/mm/yyyy format
+      var today = new Date();
+      document.getElementById("dateInput").value = formatDate(today);
+    </script>
+  </body>
+</html>
